@@ -61,6 +61,66 @@ namespace Spotify_project.Controllers
 
             }
             return Ok();
+
         }
+
+        [HttpDelete]
+        [Route("{IdAlbum}")]
+
+        public IActionResult DeleteAlbum([FromServices] IOptions<ConnectionStringOptions> options, [FromRoute] int IdAlbum)
+        {
+            using (SqlConnection connection = new SqlConnection(options.Value.MyConnection))
+            {
+                connection.Open();
+
+                SqlCommand command = new();
+                command.Connection = connection;
+                command.CommandText = @"delete from Album where Id = @Id";
+
+                command.Parameters.Add(new SqlParameter("Id", IdAlbum));
+
+                command.ExecuteNonQuery();
+            }
+
+            return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("{IdAlbum}")]
+        public IActionResult GetAlbum([FromServices] IOptions<ConnectionStringOptions> options, [FromQuery] int IdAlbum)
+        {
+            Album album = null;
+
+            using (SqlConnection connection = new SqlConnection(options.Value.MyConnection))
+            {
+                connection.Open();
+
+                SqlCommand command = new();
+                command.Connection = connection;
+                command.CommandText = @"select * from Album where Id = @Id";
+                command.CommandType = System.Data.CommandType.Text;
+
+                command.Parameters.Add(new SqlParameter("Id", IdAlbum));
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        album = new Album()
+                        {
+                            CPF = dr.GetString(1),
+                            DataCriacao = dr.GetDateTime(5),
+                            DataNasc = dr.GetDateTime(2),
+                            Email = dr.GetString(4),
+                            Id = dr.GetInt32(3),
+                            Nome = dr.GetString(0)
+                        };
+                    }
+                }
+            }
+            return Ok(album);
+        }
+
     }
 }
