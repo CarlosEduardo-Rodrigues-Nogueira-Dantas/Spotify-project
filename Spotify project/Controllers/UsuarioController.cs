@@ -8,7 +8,6 @@ namespace Spotify_project.Controllers
 {
     [Route("api/usuarios")]
     [ApiController]
-
     public class UsuarioController : Controller
     {
         [HttpPost]

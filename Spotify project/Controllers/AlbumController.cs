@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Spotify_project.Model;
 using Spotify_project.Options;
@@ -6,10 +6,10 @@ using System.Data.SqlClient;
 
 namespace Spotify_project.Controllers
 {
+    [Route("api/albuns")]
+    [ApiController]
     public class AlbumController : Controller
     {
-        [HttpPost]
-        [Route("")]
 
         public IActionResult PostAlbum([FromServices] IOptions<ConnectionStringOptions> options, [FromBody] Album album)
         {
