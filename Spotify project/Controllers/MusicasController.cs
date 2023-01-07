@@ -10,6 +10,9 @@ namespace Spotify_project.Controllers
     [ApiController]
     public class MusicasController : Controller
     {
+        [HttpPost]
+        [Route("")]
+
         public IActionResult PostMusicas([FromServices] IOptions<ConnectionStringOptions> options, [FromBody] Musicas musicas)
         {
             using (SqlConnection Connection = new SqlConnection(options.Value.MyConnection))

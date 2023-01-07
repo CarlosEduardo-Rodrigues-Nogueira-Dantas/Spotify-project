@@ -10,6 +10,8 @@ namespace Spotify_project.Controllers
     [ApiController]
     public class AlbumController : Controller
     {
+        [HttpPost]
+        [Route("")]
 
         public IActionResult PostAlbum([FromServices] IOptions<ConnectionStringOptions> options, [FromBody] Album album)
         {

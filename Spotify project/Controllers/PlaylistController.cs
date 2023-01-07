@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Spotify_project.Controllers
 {
-    [Route("api/")]
+    [Route("api/playlist")]
     [ApiController]
     public class PlaylistController : ControllerBase
     {
